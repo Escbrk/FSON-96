@@ -1,22 +1,63 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import transactions from "../payments.json";
 
-function App() {
+const Payment = ({
+  cardNumber,
+  cardOwner,
+  cardType,
+  amount,
+  date,
+  description,
+  isPaid,
+}) => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React + 🐷</h1>
-      <div className="card"></div>
-    </>
+    <div>
+      <p>Amount: {amount}</p>
+      <p>
+        Status:{" "}
+        <span style={{ color: isPaid ? "green" : "yellow" }}>
+          {isPaid ? "Paid" : "Pending"}
+        </span>
+      </p>
+      <p>Description: {description}</p>
+      <p>Card Number: {cardNumber}</p>
+      <p>Card Type: {cardType}</p>
+      <p>Card Holder Name: {cardOwner}</p>
+      <p>Payment Date: {date}</p>
+      _______________________________________________
+    </div>
   );
-}
+};
 
-export default App;
+export const App = () => {
+  return (
+    <ul style={{ listStyle: "none" }}>
+      {transactions.map(
+        ({
+          id,
+          cardNumber,
+          cardOwner,
+          cardType,
+          date,
+          amount,
+          description,
+          isPaid,
+        }) => {
+          return (
+            <li key={id}>
+              <Payment
+                cardNumber={cardNumber}
+                cardOwner={cardOwner}
+                cardType={cardType}
+                date={date}
+                amount={amount}
+                description={description}
+                isPaid={isPaid}
+              />
+            </li>
+          );
+        }
+      )}
+    </ul>
+  );
+};
