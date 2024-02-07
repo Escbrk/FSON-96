@@ -1,5 +1,5 @@
 import "./App.css";
-import transactions from "../payments.json";
+import transactions from "../src/payments.json";
 
 const Payment = ({
   cardNumber,
