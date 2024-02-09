@@ -1,6 +1,7 @@
 .container {
   border: 2px solid white;
   width: 400px;
+  padding: 20px;
 }
 
 .isPaid {
@@ -9,4 +10,8 @@
 
 .isPending {
   border-color: orangered;
+}
+
+.iconColor {
+    color: orangered;
 }

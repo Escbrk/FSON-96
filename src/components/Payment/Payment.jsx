@@ -1,5 +1,7 @@
 import clsx from "clsx";
-import { FaBeer } from "react-icons/fa";
+// import { FaBeer } from "react-icons/fa";
+import { FcPaid } from "react-icons/fc";
+import { MdOutlinePendingActions } from "react-icons/md";
 import css from "./Payment.module.css";
 
 export const Payment = ({
@@ -13,7 +15,8 @@ export const Payment = ({
   return (
     <div className={containerClass}>
       <div>
-        <FaBeer size="40" className={css.icon} />
+        {/* <FaBeer size="40" className={css.icon} /> */}
+              {isPaid ? <FcPaid size="40" /> : <MdOutlinePendingActions size="40" className={ css.iconColor} />}
       </div>
       <p>
         Status:{" "}
