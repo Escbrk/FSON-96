@@ -1,34 +1,19 @@
+import Counter from "../Counter/Counter";
 import "./App.css";
-import { useState } from "react";
+// import { useState } from "react";
 
+// const colorPickerOptions = [
+//   { label: "red", color: "#F44336" },
+//   { label: "green", color: "#4CAF50" },
+//   { label: "blue", color: "#2196F3" },
+//   { label: "grey", color: "#607D8B" },
+//   { label: "pink", color: "#E91E63" },
+//   { label: "indigo", color: "#3F51B5" },
+// ];
 export const App = () => {
-  const [values, setValues] = useState({
-    x: 0,
-    y: 0,
-  });
+  return <>
+    <h1>Состояние компонента</h1>
 
-	const updateX = () => {
-    setValues({
-      ...values,
-      x: values.x + 1,
-    });
-  };
-
-  const updateY = () => {
-    setValues({
-      ...values,
-      y: values.y + 1,
-    });
-  };
-  
-  return (
-    <div>
-      <p>
-        x: {values.x}, y: {values.y}
-      </p>
-
-      <button onClick={updateX}>Update x</button>
-      <button onClick={updateY}>Update y</button>
-    </div>
-  );
+    <Counter/>
+  </>;
 };
