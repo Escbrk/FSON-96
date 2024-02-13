@@ -1,4 +1,3 @@
-import Modal from "../Modal/Modal";
 import "./App.css";
 import { useEffect, useState } from "react";
 
