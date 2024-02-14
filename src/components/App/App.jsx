@@ -72,6 +72,7 @@ import "./App.css";
 import articles from "../../articles.json";
 import Controls from "../Controls/Controls";
 import Progress from "../Progress/Progress";
+import ArticleView from "../ArticleView/ArticleView";
 
 export const App = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
@@ -99,10 +100,7 @@ export const App = () => {
         last={isLast}
       />
       <Progress current={currentArticle} total={totalArticles} />
-      <article>
-        <h1>{visibleArticle.topic}</h1>
-        <p>{visibleArticle.text}</p>
-      </article>
+      <ArticleView article={visibleArticle} />
     </div>
   );
 };
