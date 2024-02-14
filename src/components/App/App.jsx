@@ -92,7 +92,7 @@ export const App = () => {
   const totalArticles = articles.length;
 
   return (
-    <div>
+    <div className="container">
       <Controls
         onPrev={handlePrev}
         onNext={handleNext}
