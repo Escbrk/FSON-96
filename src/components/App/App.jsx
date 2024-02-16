@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 // import ClickTracker from "../ClickTracker/ClickTracker";
 
@@ -75,7 +75,14 @@ import Progress from "../Progress/Progress";
 import ArticleView from "../ArticleView/ArticleView";
 
 export const App = () => {
-  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [selectedIdx, setSelectedIdx] = useState(() => {
+    const savedPage = localStorage.getItem("saved-page");
+    return savedPage !== null ? JSON.parse(savedPage) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("saved-page", selectedIdx);
+  }, [selectedIdx]);
 
   const handlePrev = () => {
     setSelectedIdx(selectedIdx - 1);
@@ -104,3 +111,24 @@ export const App = () => {
     </div>
   );
 };
+
+//!============================
+// import ClickTracker from "../ClickTracker/ClickTracker";
+// import Timer from "../Timer/Timer";
+
+//* Модуль 2 / Занятие 2
+
+// export const App = () => {
+//   // const [isVisible, setIsVisible] = useState(false);
+
+//   return (
+//     <div>
+//       <ClickTracker>Clicks 1 </ClickTracker>
+//       {/* <button onClick={() => setIsVisible(!isVisible)}>
+//         {isVisible ? "Hide" : "Show"}
+//       </button>
+//       {isVisible && <Timer />} */}
+//     </div>
+//   );
+// };
+//!============================
