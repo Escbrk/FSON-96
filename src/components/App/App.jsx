@@ -1,46 +1,93 @@
-import LoginForm from "../LoginForm/LoginForm";
+import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import "./App.css";
-import { useId } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const MyComponent = () => {
-  const id = useId();
+// export default function App() {
+//   const [lang, setLang] = useState(() => {
+//     const savedLang = localStorage.getItem("lang");
+//     return savedLang !== null ? savedLang : "en";
+//   });
 
-  return (
-    <div>
-      <label htmlFor={id}>Text field label</label>
-      <input type="text" id={id} />
-    </div>
-  );
-};
+//   useEffect(() => {
+//     localStorage.setItem("lang", lang);
+//   }, [lang]);
 
-const SearchBar = () => {
-  const [inputValue, setInputValue] = useState("");
+//   return (
+//     <div>
+//       <p>Selected language: {lang}</p>
+//       <LangSwitcher value={lang} onSelect={setLang} />
+//     </div>
+//   );
+// }
+//!============================
 
-  const handleChange = e => {
-    setInputValue(e.target.value)
-  }
+// export default function App() {
+//   const [size, setSize] = useState(() => {
+//     const savedSize = localStorage.getItem('size')
+//     return savedSize !== null ? savedSize : 'sm'
+//   })
 
-  return (
-    <div>
-      <input type="text" value={inputValue} onChange={handleChange} />
-      <p>{inputValue}</p>
-    </div>
-  );
-};
+//   useEffect(() => {
+//     localStorage.setItem('size', size)
+//   }, [size])
 
+//   const handleSize = e => {
+//     setSize(e.target.value)
+//   }
+
+//   return (
+//     <>
+//       <h1>Select coffee size</h1>
+//       <label>
+//         <input
+//           type="radio"
+//           name="coffeeSize"
+//           value="sm"
+//           checked={size === "sm"}
+//           onChange={handleSize}
+//         />
+//         Small
+//       </label>
+//       <label>
+//         <input
+//           type="radio"
+//           name="coffeeSize"
+//           value="md"
+//           checked={size === "md"}
+//           onChange={handleSize}
+//         />
+//         Meduim
+//       </label>
+//       <label>
+//         <input
+//           type="radio"
+//           name="coffeeSize"
+//           value="lg"
+//           checked={size === "lg"}
+//           onChange={handleSize}
+//         />
+//         Large
+//       </label>
+//     </>
+//   );
+// }
+//!============================
 export default function App() {
-  const handleLogin = (userData) => {
-    console.log(userData);
-  };
+  // const [lang, setLang] = useState(() => {
+  //   const savedLang = localStorage.getItem("lang");
+  //   return savedLang !== null ? savedLang : "en";
+  // });
+
+  // useEffect(() => {
+  //   localStorage.setItem("lang", lang);
+  // }, [lang]);
+
   return (
     <div>
-      <h1>Please login to your account!</h1>
-      {/* Передаємо колбек як пропс форми */}
-      <LoginForm onSubmit={handleLogin} />
-      <MyComponent />
-      <SearchBar/>
+      <label>
+        <input type="checkbox" name="terms" />I accept terms and conditions
+      </label>
+      <button type="button">Proceed</button>
     </div>
   );
 }
-//!============================
