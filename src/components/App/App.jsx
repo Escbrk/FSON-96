@@ -1,3 +1,4 @@
+import Form from "../Form/Form";
 import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import TextInput from "../TextInput/TextInput";
 import UserForm from "../UserForm/UserForm";
@@ -103,6 +104,7 @@ import { useState, useEffect } from "react";
 //!============================
 export default function App() {
   const [text, setText] = useState("qwerty");
+  const [lang, setLang] = useState("en");
   const [user, setUser] = useState(null);
 
   const saveUser = (user) => {
@@ -126,6 +128,11 @@ export default function App() {
       <hr />
       <TextInput value={text} onChange={setText} />
       <p>{text}</p>
+      <hr />
+      <LangSwitcher lang={lang} onSelect={ setLang} />
+      <p>Current lang: {lang}</p>
+      <hr />
+      <Form/>
     </div>
   );
 }
