@@ -44,12 +44,3 @@ ul {
 .read-the-docs {
   color: #888;
 }
-
-.container {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  text-align: left;
-  display: flex;
-  flex-direction: column-reverse;
-}
