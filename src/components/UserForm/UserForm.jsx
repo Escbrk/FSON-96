@@ -1,39 +1,49 @@
 import { useId } from "react";
+import { Field, Form, Formik } from "formik";
 
 export default function UserForm({ onSubmit }) {
   const usernameFieldId = useId();
-  const roleFieldId = useId()
+  const emeilFieldId = useId();
+  const roleFieldId = useId();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const submit = (values, actions) => {
+    console.log(values);
 
-    onSubmit({
-      username: e.target.elements.username.value,
-      role: e.target.elements.role.value.toUpperCase(),
-    });
-
-    e.target.reset();
+    actions.resetForm();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor={usernameFieldId}>Username</label>
-        <br />
-        <input type="text" name="username" id={usernameFieldId} />
-      </div>
-      <div>
-        <label htmlFor={roleFieldId}>Role:</label>
-        <br />
-        <select name="role" id={roleFieldId}>
-          <option value="guest">Guest</option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-      <button type="submit" name="submit">
-        Submit
-      </button>
-    </form>
+    <Formik
+      initialValues={{
+        username: "",
+        email: "",
+      }}
+      onSubmit={submit}
+    >
+      <Form>
+        <div>
+          <label htmlFor={usernameFieldId}>Username</label>
+          <br />
+          <Field name="username" id={usernameFieldId} />
+          <br />
+          <label htmlFor={emeilFieldId}>Email</label>
+          <br />
+          <Field type="email" name="email" id={emeilFieldId} />
+        </div>
+
+        {/* <div>
+          <label htmlFor={roleFieldId}>Role:</label>
+          <br />
+          <select name="role" id={roleFieldId}>
+            <option value="guest">Guest</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div> */}
+        <button type="submit" name="submit">
+          Submit
+        </button>
+      </Form>
+    </Formik>
   );
 }
