@@ -1,44 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
-import initialTasks from "../../tasks.json";
-import Form from "../Form/Form";
-import Filter from "../Filter/Filter";
-import TaskList from "../TaskList/TaskList";
+import ArticleList from "../ArticleList/ArticleList";
+import { fetchArticlesWithTopic } from "../../articles-api";
+import { Error } from "../Error/Error";
+import { Loader } from "../Loader/Loader";
+import { SearchForm } from "../SearchForm/SearchForm";
 
-//!============================
 export default function App() {
-  const [tasks, setTasks] = useState(() => {
-    const savedData = localStorage.getItem("tasks");
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-    return savedData !== null ? JSON.parse(savedData) : initialTasks;
-  });
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  });
-
-  const addTask = (newTask) => {
-    setTasks((prevTasks) => {
-      return [...prevTasks, newTask];
-    });
+  const handleSearch = async (topic) => {
+    try {
+      setArticles([]);
+      setError(false);
+      setLoading(true);
+      const data = await fetchArticlesWithTopic(topic);
+      setArticles(data);
+    } catch (error) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  const deleteTask = (taskId) => {
-    setTasks((prevTasks) => {
-      return prevTasks.filter((task) => task.id !== taskId);
-    });
-  };
-
-  const visibleTasks = tasks.filter((task) =>
-    task.text.toLowerCase().includes(filter.toLowerCase())
-  );
 
   return (
     <div>
-      <Form onAdd={addTask} />
-      <Filter value={filter} onFilter={setFilter} />
-      <TaskList tasks={visibleTasks} onDelete={deleteTask} />
+      <SearchForm onSearch={handleSearch} />
+      {loading && <Loader />}
+      {error && <Error />}
+      {articles.length > 0 && <ArticleList items={articles} />}
     </div>
   );
 }
