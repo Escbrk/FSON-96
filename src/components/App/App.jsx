@@ -35,7 +35,27 @@ import "./App.css";
 //!=======================================
 
 export default function App() {
-const btnRef = useRef()
+  const [value, setValue] = useState(0);
+  const btnRef = useRef();
 
-  return <button ref={btnRef}>Button with ref</button>
+  console.log("App: ", btnRef.current);
+
+  useEffect(() => {
+    console.log("App: ", btnRef.current);
+  });
+
+  const handleClick = () => {
+    console.log("handleClick", btnRef.current);
+  };
+
+  return (
+    <>
+      <button onClick={() => setValue(value + 1)}>
+        Update value to trigger re-render ({value})
+      </button>
+      <button ref={btnRef} onClick={handleClick}>
+        Button with ref
+      </button>
+    </>
+  );
 }
