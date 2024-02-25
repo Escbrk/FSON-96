@@ -1,36 +1,41 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
-import ArticleList from "../ArticleList/ArticleList";
-import { fetchArticlesWithTopic } from "../../articles-api";
-import { Error } from "../Error/Error";
-import { Loader } from "../Loader/Loader";
-import { SearchForm } from "../SearchForm/SearchForm";
+
+//!=======================================
+
+// export default function App() {
+//   const [planets, setPlanets] = useState(["Earth", "Mars", "Jupiter", "Venus"]);
+//   const [query, setQuery] = useState("");
+//   const [clicks, setClicks] = useState(0);
+
+//   // const filteredPlanets = planets.filter((planet) => planet.includes(query));
+//   const filteredPlanets = useMemo(
+//     () => planets.filter((planet) => planet.includes(query)),
+//     [planets, query]
+//   );
+
+//   return (
+//     <>
+//       <button
+//         onClick={() => {
+//           setClicks(clicks + 1);
+//         }}
+//       >
+//         Number of clicks: {clicks}
+//       </button>
+//       <ul>
+//         {filteredPlanets.map((planet) => (
+//           <li key={planet}>{planet}</li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// }
+
+//!=======================================
 
 export default function App() {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+const btnRef = useRef()
 
-  const handleSearch = async (topic) => {
-    try {
-      setArticles([]);
-      setError(false);
-      setLoading(true);
-      const data = await fetchArticlesWithTopic(topic);
-      setArticles(data);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <div>
-      <SearchForm onSearch={handleSearch} />
-      {loading && <Loader />}
-      {error && <Error />}
-      {articles.length > 0 && <ArticleList items={articles} />}
-    </div>
-  );
+  return <button ref={btnRef}>Button with ref</button>
 }
