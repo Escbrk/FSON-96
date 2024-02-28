@@ -1,6 +1,9 @@
 import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import { Player } from "../Player/Player";
+import axios from "axios";
+import ArticleList from "../ArticleList/ArticleList";
+import SearchForm from "../SearchForm/SearchForm";
 
 //!=======================================
 
@@ -142,12 +145,95 @@ import { Player } from "../Player/Player";
 // };
 
 //!=======================================
-import { UserMenu } from "../UserMenu/UserMenu";
+// import { UserMenu } from "../UserMenu/UserMenu";
+
+// export default function App() {
+//   return (
+//     <div>
+//       <UserMenu/>
+//     </div>
+//   );
+// }
+
+//!=======================================
+// import { fetchArticles } from "../../articles-api";
+
+// export default function App() {
+//   const [articles, setArticles] = useState([]);
+
+//   useEffect(() => {
+//     async function getArticles() {
+//       const data = await fetchArticles();
+//       setArticles(data);
+//     }
+
+//     getArticles();
+//   }, []);
+//   return (
+//     <div>
+//       <SearchForm />
+//       {articles.length > 0 && <ArticleList items={articles} />}
+//     </div>
+//   );
+// }
+
+//!=======================================
+import { fetchArticles } from "../../articles-api";
+import { MagnifyingGlass } from "react-loader-spinner";
+import LoadMore from "../LoadMore/LoadMore";
+import toast from "react-hot-toast";
 
 export default function App() {
+  const [articles, setArticles] = useState([]);
+  const [query, setQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    if (query === "") return;
+
+    const getData = async () => {
+      try {
+        setIsError(false);
+        setIsLoading(true);
+        const data = await fetchArticles(query, page);
+        setArticles((prevArticles) => {
+          return [...prevArticles, ...data];
+        });
+        if (articles.length === 0) {
+          toast.error("🤷‍♂️Sorry, we found nothing🤷‍♂️")
+        }
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, [query, page]);
+
+  const handleSearch = (query) => {
+    setArticles([]);
+    setQuery(query.toLowerCase());
+    setPage(1);
+  };
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  };
+
   return (
     <div>
-      <UserMenu/>
+      <SearchForm onSearch={handleSearch} />
+      {isError && <b>Oops! Error! Reload!</b>}
+      {articles.length > 0 && (
+        <>
+          <ArticleList items={articles} />
+          {!isLoading && <LoadMore page={page} setPage={handleLoadMore} />}
+        </>
+      )}
+      {isLoading && <MagnifyingGlass />}
     </div>
   );
 }
