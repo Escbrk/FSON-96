@@ -4,6 +4,8 @@ import { Player } from "../Player/Player";
 import axios from "axios";
 import ArticleList from "../ArticleList/ArticleList";
 import SearchForm from "../SearchForm/SearchForm";
+import { UseMemoExample } from "../UseMemoExample/UseMemoExample";
+import RefExample from "../RefExample/RefExample";
 
 //!=======================================
 
@@ -178,62 +180,79 @@ import SearchForm from "../SearchForm/SearchForm";
 // }
 
 //!=======================================
-import { fetchArticles } from "../../articles-api";
-import { MagnifyingGlass } from "react-loader-spinner";
-import LoadMore from "../LoadMore/LoadMore";
-import toast from "react-hot-toast";
+// import { fetchArticles } from "../../articles-api";
+// import { MagnifyingGlass } from "react-loader-spinner";
+// import LoadMore from "../LoadMore/LoadMore";
+// import toast from "react-hot-toast";
+
+// export default function App() {
+//   const [articles, setArticles] = useState([]);
+//   const [query, setQuery] = useState("");
+//   const [page, setPage] = useState(1);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [isError, setIsError] = useState(false);
+
+//   useEffect(() => {
+//     if (query === "") return;
+
+//     const getData = async () => {
+//       try {
+//         setIsError(false);
+//         setIsLoading(true);
+//         const data = await fetchArticles(query, page);
+//         setArticles((prevArticles) => {
+//           return [...prevArticles, ...data];
+//         });
+//       } catch (error) {
+//         setIsError(true);
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+//     getData();
+//   }, [query, page]);
+
+//   const handleSearch = (query) => {
+//     setArticles([]);
+//     setQuery(query.toLowerCase());
+//     setPage(1);
+//   };
+
+//   const handleLoadMore = () => {
+//     setPage(page + 1);
+//   };
+
+//   return (
+//     <div>
+//       <SearchForm onSearch={handleSearch} data={articles} />
+//       {isError && <b>Oops! Error! Reload!</b>}
+//       {articles.length > 0 && (
+//         <>
+//           <ArticleList items={articles} />
+//           {!isLoading && <LoadMore page={page} setPage={handleLoadMore} />}
+//         </>
+//       )}
+//       {isLoading && <MagnifyingGlass />}
+//     </div>
+//   );
+// }
+
+//!=======================================
 
 export default function App() {
-  const [articles, setArticles] = useState([]);
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [clicks, setClicks] = useState(0);
+  const date = useRef(new Date());
 
-  useEffect(() => {
-    if (query === "") return;
-
-    const getData = async () => {
-      try {
-        setIsError(false);
-        setIsLoading(true);
-        const data = await fetchArticles(query, page);
-        setArticles((prevArticles) => {
-          return [...prevArticles, ...data];
-        });
-        if (articles.length === 0) {
-          toast.error("🤷‍♂️Sorry, we found nothing🤷‍♂️")
-        }
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
-  }, [query, page]);
-
-  const handleSearch = (query) => {
-    setArticles([]);
-    setQuery(query.toLowerCase());
-    setPage(1);
-  };
-
-  const handleLoadMore = () => {
-    setPage(page + 1);
+  const handleClick = () => {
+    setClicks(clicks + 1);
   };
 
   return (
     <div>
-      <SearchForm onSearch={handleSearch} />
-      {isError && <b>Oops! Error! Reload!</b>}
-      {articles.length > 0 && (
-        <>
-          <ArticleList items={articles} />
-          {!isLoading && <LoadMore page={page} setPage={handleLoadMore} />}
-        </>
-      )}
-      {isLoading && <MagnifyingGlass />}
+      <button onClick={handleClick}>{clicks}</button>
+      <p>{date.current.getTime()}</p>
+      {/* <UseMemoExample /> */}
+      {/* <RefExample /> */}
     </div>
   );
 }

@@ -13,13 +13,17 @@ const validationSchema = Yup.object().shape({
   query: Yup.string().min(1, "Too Short! ❌").required(notify),
 });
 
-const SearchForm = ({ onSearch }) => {
+const SearchForm = ({ onSearch, data }) => {
   return (
     <Formik
       initialValues={{ query: "" }}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
         actions.resetForm();
+
+        if (data.length === 0) {
+          toast.error("🤷‍♂️Sorry, we found nothing🤷‍♂️");
+        }
 
         if (values.query.trim() === "") {
           notify();
