@@ -66,20 +66,34 @@ const SearchForm = ({ onSearch }) => {
 
 export default SearchForm;
 
-const formCtx = createContext();
+//*=======================================
+//* Приммер работы Formik через Context
 
-const MyFormik = ({ initialValues, onSubmit, children }) => {
-  const [state, setState] = useState(initialValues);
-  return <formCtx.Provider value={{ state }}>{children}</formCtx.Provider>;
-};
+// const formCtx = createContext();
 
-const Form = ({ children }) => {
-  const ctx = useContext(formCtx);
+// const MyFormik = ({ initialValues, onSubmit, children }) => {
+//   const [state, setState] = useState(initialValues);
+//   return (
+//     <formCtx.Provider value={{ state, onSubmit }}>{children}</formCtx.Provider>
+//   );
+// };
 
-  return <form>{children}</form>;
-};
+// const Form = ({ children }) => {
+//   const ctx = useContext(formCtx);
 
-const Field = ({ name }) => {
-  const ctx = useContext(formCtx);
-  return <input type="text" name={name} value={ctx.state[name]} />;
-};
+//   const ctx = useContext(formCtx);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     ctx.onSubmit(ctx.state);
+//   };
+
+//   return <form onSubmit={handleSubmit}>{children}</form>;
+// };
+
+// const Field = ({ name }) => {
+//   const ctx = useContext(formCtx);
+//   return <input type="text" name={name} value={ctx.state[name]} />;
+// };
+
+//*=======================================
