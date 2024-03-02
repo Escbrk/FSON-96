@@ -1,4 +1,11 @@
-import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import {
+  forwardRef,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import "./App.css";
 import { Player } from "../Player/Player";
 import axios from "axios";
@@ -6,6 +13,8 @@ import ArticleList from "../ArticleList/ArticleList";
 import SearchForm from "../SearchForm/SearchForm";
 import { UseMemoExample } from "../UseMemoExample/UseMemoExample";
 import RefExample from "../RefExample/RefExample";
+import Timer from "../Timer/Timer";
+import LangSwitcher from "../LangSwitcher/LangSwitcher";
 
 //!=======================================
 
@@ -239,20 +248,70 @@ import RefExample from "../RefExample/RefExample";
 
 //!=======================================
 
-export default function App() {
-  const [clicks, setClicks] = useState(0);
-  const date = useRef(new Date());
+// export default function App() {
+//   const [clicks, setClicks] = useState(0);
+//   const date = useRef(new Date());
 
-  const handleClick = () => {
-    setClicks(clicks + 1);
-  };
+//   const handleClick = () => {
+//     setClicks(clicks + 1);
+//   };
+
+//   return (
+//     <div>
+//       <button onClick={handleClick}>{clicks}</button>
+//       <p>{date.current.getTime()}</p>
+//       {/* <UseMemoExample /> */}
+//       {/* <RefExample /> */}
+//     </div>
+//   );
+// }
+
+//!=======================================
+// const CustomInput = forwardRef((props, ref) => {
+//   console.log(ref)
+//   return (
+//     <div>
+//       <input type="text" ref={ref} />
+//     </div>
+//   );
+// });
+// // CustomInput.displayName = CustomInput
+
+// export default function App() {
+//   // const [isVisible, setIsVisible] = useState(false);
+
+//   const inputRef = useRef();
+//   const setFocus = () => {
+//     console.log(inputRef.current.focus())
+//   };
+
+//   return (
+//     <div>
+//       {/* <button
+//         onClick={() => {
+//           setIsVisible(!isVisible);
+//         }}
+//       >
+//         {isVisible ? "Hide" : "Show"}
+//       </button>
+//       {isVisible && <Timer />} */}
+//       <button onClick={setFocus}>Set focus</button>
+//       <CustomInput ref={inputRef} />
+//     </div>
+//   );
+// }
+
+//!=======================================
+import langContext from "../lang-context";
+
+export default function App() {
+  const ctxValue = useContext(langContext);
+  console.log(ctxValue)
 
   return (
     <div>
-      <button onClick={handleClick}>{clicks}</button>
-      <p>{date.current.getTime()}</p>
-      {/* <UseMemoExample /> */}
-      {/* <RefExample /> */}
+      <LangSwitcher />
+      <p>Current lang: { ctxValue.lang}</p>
     </div>
   );
 }

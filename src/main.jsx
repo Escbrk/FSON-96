@@ -2,18 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./components/App/App.jsx";
 import "./index.css";
-
-import { UserProvider } from "./userContext";
-
-const contextValue = {
-  username: "Mango",
-  isLoggedIn: true,
-};
+import { LangProvider } from "./components/lang-context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <UserProvider>
+    <LangProvider>
       <App />
-    </UserProvider>
+    </LangProvider>
   </React.StrictMode>
 );
