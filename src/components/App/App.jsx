@@ -1,25 +1,18 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
-// import Home from "path/to/pages/Home";
-// import About from "path/to/pages/About";
-// import Products from "path/to/pages/Products";
-// import NotFound from "path/to/pages/NotFound";
-import ProductDetails from "../../pages/ProductDetails/ProductDetails";
+import Navigation from "../Navigation/Navigation";
 
 const App = () => {
   return (
     <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/products">Products</Link>
-      </nav>
+      <h1>react router</h1>
+
+      <Navigation />
+
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        {/* <Route path="/about" element={<About />} /> */}
-        {/* <Route path="/products" element={<Products />} /> */}
-        <Route path="/products/:productId" element={<ProductDetails />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/" element={<div>Home page</div>} />
+        <Route path="/payments" element={<div>Payments page</div>} />
+        <Route path="*" element={ <div>404 Not Found!</div>} />
       </Routes>
     </div>
   );
