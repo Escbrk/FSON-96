@@ -1,13 +1,17 @@
-// import PaymentCard from
+import PaymentCard from "../PaymentsCard/PaymentsCard";
 
-const PaymentList = () => {
+const PaymentList = ({ payments }) => {
   return (
     <ul>
-      {payments.map(({ payment }) => {
+      {payments.map((payment) => {
+        return (
         <li key={payment.id}>
           <PaymentCard payment={payment} />
-        </li>;
+        </li>
+        );
       })}
     </ul>
   );
 };
+
+export default PaymentList;
