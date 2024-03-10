@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const PaymentCard = ({ payment }) => {
+const PaymentsCards = ({ payment }) => {
   return (
     <div>
       <p>Amount: {payment.amount}</p>
@@ -10,4 +10,4 @@ const PaymentCard = ({ payment }) => {
   );
 };
 
-export default PaymentCard
+export default PaymentsCards;

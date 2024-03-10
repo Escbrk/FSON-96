@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import { getPaymentById } from "../../payments-api";
+import PaymentCard from "../components/PaymentCard/PaymentCard";
 
 const PaymentsDetailsPage = () => {
   const [payment, setPayment] = useState([]);
@@ -24,29 +25,13 @@ const PaymentsDetailsPage = () => {
     getData();
   }, [paymentId]);
 
-  const { cardNumber, amount, cardOwner, cardType, date, description, isPaid } =
-    payment;
-
   return (
     <div>
       <h2>Payment details: {paymentId}</h2>
       {isLoading && <b>Loading payments...</b>}
-      {error && <b>HTTP Error!</b>}
 
-      {payment && (
-        <div style={{ border: "1px solid red", padding: "15px" }}>
-          <p>Amount: {amount}</p>
-          <p>Card number: {cardNumber}</p>
-          <p>Card type: {cardType}</p>
-          <p>Card owner: {cardOwner}</p>
-          <p>Date: {date}</p>
-          <p>Description: {description}</p>
-          <p>
-            Paid:{" "}
-            {(isPaid && <span>Yes!</span>) || (!isPaid && <span>No!</span>)}
-          </p>
-        </div>
-      )}
+      {(error && <b>HTTP Error!</b>) ||
+        (payment && <PaymentCard payment={payment} />)}
 
       <ul>
         <li>

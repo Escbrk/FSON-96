@@ -1,14 +1,23 @@
 const PaymentCard = ({
-  cardNumber,
-  amount,
-  cardOwner,
-  cardType,
-  date,
-  description,
-  isPaid,
+  payment: {
+    amount,
+    cardNumber,
+    cardType,
+    cardOwner,
+    date,
+    description,
+    isPaid,
+  },
 }) => {
   return (
-    <div style={{ border: "1px solid red", padding: "15px", width: "300px" }}>
+    <div
+      style={{
+        border: "1px solid red",
+        padding: "15px",
+        width: "300px",
+        borderRadius: "20px",
+      }}
+    >
       <p>Amount: {amount}</p>
       <p>Card number: {cardNumber}</p>
       <p>Card type: {cardType}</p>

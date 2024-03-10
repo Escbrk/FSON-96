@@ -1,4 +1,4 @@
-import PaymentCard from "../PaymentsCard/PaymentsCard";
+import PaymentsCards from "../PaymentsCards/PaymentsCards";
 
 const PaymentList = ({ payments }) => {
   return (
@@ -6,7 +6,7 @@ const PaymentList = ({ payments }) => {
       {payments.map((payment) => {
         return (
         <li key={payment.id}>
-          <PaymentCard payment={payment} />
+          <PaymentsCards payment={payment} />
         </li>
         );
       })}
