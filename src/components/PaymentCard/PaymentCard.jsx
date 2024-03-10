@@ -8,7 +8,7 @@ const PaymentCard = ({
   isPaid,
 }) => {
   return (
-    <div style={{ border: "1px solid red", padding: "15px" }}>
+    <div style={{ border: "1px solid red", padding: "15px", width: "300px" }}>
       <p>Amount: {amount}</p>
       <p>Card number: {cardNumber}</p>
       <p>Card type: {cardType}</p>
