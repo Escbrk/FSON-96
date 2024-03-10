@@ -18,11 +18,11 @@ const PaymentsDetailsPage = () => {
       } catch (error) {
         setError(true);
       } finally {
-        isLoading(false);
+        setIsLoading(false);
       }
     }
     getData();
-  }, [isLoading, paymentId]);
+  }, [paymentId]);
 
   const { cardNumber, amount, cardOwner, cardType, date, description, isPaid } =
     payment;
@@ -30,6 +30,9 @@ const PaymentsDetailsPage = () => {
   return (
     <div>
       <h2>Payment details: {paymentId}</h2>
+      {isLoading && <b>Loading payments...</b>}
+      {error && <b>HTTP Error!</b>}
+
       {payment && (
         <div style={{ border: "1px solid red", padding: "15px" }}>
           <p>Amount: {amount}</p>

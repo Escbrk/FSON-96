@@ -6,7 +6,7 @@ import PaymentsPage from "../../pages/PaymentsPage";
 import NotFoundPage from "../../pages/NotFoundPage";
 import PaymentsDetailsPage from "../../pages/PaymentsDetailsPage";
 import ClientInfo from "../ClientInfo/ClientInfo";
-import PaymentReceipt from "../PaymentReceipt/PaymentReceipt";
+import PaymentReceipt from "../PaymentReceipt/PAymentReceipt";
 
 const App = () => {
   return (
