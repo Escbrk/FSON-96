@@ -43,7 +43,7 @@ const PaymentsDetailsPage = () => {
       </ul>
 
       <Outlet />
-      <Link to={"/payments"}>Go Back</Link>
+      <Link to={"/payments"}>⬅️Go Back</Link>
     </div>
   );
 };

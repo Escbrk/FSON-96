@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
-const PaymentsCards = ({ payment }) => {
+const PaymentsCards = ({ payment: { cardOwner, amount, description, id } }) => {
   return (
     <div>
-      <p>Amount: {payment.amount}</p>
-      <p>Description: {payment.description}</p>
-      <Link to={`/payments/${payment.id}`}>Details</Link>
+      <p>Owner: {cardOwner}</p>
+      <p>Amount: {amount}</p>
+      <p>Description: {description}</p>
+      <Link to={`/payments/${id}`}>Details</Link>
+      <hr />
     </div>
   );
 };
