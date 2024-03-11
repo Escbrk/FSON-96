@@ -1,5 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { getPaymentById } from "../../payments-api";
 import PaymentCard from "../components/PaymentCard/PaymentCard";
 
@@ -8,6 +14,8 @@ const PaymentsDetailsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const { paymentId } = useParams();
+  const location = useLocation();
+  const backLinkRef = useRef(location.state ?? "/payments");
 
   useEffect(() => {
     async function getData() {
@@ -30,8 +38,9 @@ const PaymentsDetailsPage = () => {
       <h2>Payment details: {paymentId}</h2>
       {isLoading && <b>Loading payments...</b>}
 
-      {(error && <b>HTTP Error!</b>) ||
-        (payment && <PaymentCard payment={payment} />)}
+      <Link to={backLinkRef.current}>⬅️Go Back</Link>
+      {(payment && <PaymentCard payment={payment} />) ||
+        (error && <b>HTTP Error!</b>)}
 
       <ul>
         <li>
@@ -42,8 +51,9 @@ const PaymentsDetailsPage = () => {
         </li>
       </ul>
 
-      <Outlet />
-      <Link to={"/payments"}>⬅️Go Back</Link>
+      <Suspense fallback={<div>LOADING SUB COMPONENTS...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

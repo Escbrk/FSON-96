@@ -25,7 +25,9 @@ const PaymentCard = ({
       <p>Date: {date}</p>
       <p>Description: {description}</p>
       <p>
-        Paid: {(isPaid && <span>Yes!</span>) || (!isPaid && <span>No!</span>)}
+        Paid:{" "}
+        {(isPaid && <span style={{ color: "green" }}>Yes!</span>) ||
+          (!isPaid && <span style={{ color: "red" }}>No!</span>)}
       </p>
     </div>
   );
