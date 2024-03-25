@@ -1,11 +1,10 @@
-import { combineReducers, createStore } from "redux";
-import { composeWithDevTools } from "@redux-devtools/extension";
+import { configureStore } from "@reduxjs/toolkit";
 import { balanceReducer } from "./balanceSlice";
 import { langReducer } from "./localeSlice";
 
-const rootReducer = combineReducers({
-  balance: balanceReducer,
-  locale: langReducer,
+export const store = configureStore({
+  reducer: {
+    balance: balanceReducer,
+    locale: langReducer,
+  },
 });
-
-export const store = createStore(rootReducer, composeWithDevTools());
