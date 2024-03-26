@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import Balance from "../Balance/Balance";
 import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import "./App.css";
-import { selectLang } from "../../redux/localeSlice";
+import { selectLang, selectUpdated } from "../../redux/localeSlice";
 
 const App = () => {
   const lang = useSelector(selectLang);
+  const updatedAt = useSelector(selectUpdated);
 
   return (
     <div>
@@ -14,6 +15,7 @@ const App = () => {
 
       <LangSwitcher />
       <p>Select lang: {lang} </p>
+      <p>Last updated at: {updatedAt}</p>
     </div>
   );
 };
