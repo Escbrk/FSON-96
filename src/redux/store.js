@@ -1,9 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import balanceReducer from "./balanceSlice";
-import localeReducer from "./localeSlice";
 import {
   persistStore,
-  persistReducer,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -11,30 +9,11 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-
-const persistedBalanceReducer = persistReducer(
-  {
-    key: "balance",
-    storage,
-    whitelist: ["value"],
-  },
-  balanceReducer
-);
-
-const persistedLocaleReducer = persistReducer(
-  {
-    key: "locale",
-    storage,
-    whitelist: ["lang"],
-  },
-  localeReducer
-);
+import taskReducer from "./tasksSlice";
 
 export const store = configureStore({
   reducer: {
-    balance: persistedBalanceReducer,
-    locale: persistedLocaleReducer,
+    tasks: taskReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

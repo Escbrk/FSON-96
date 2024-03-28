@@ -1,21 +1,18 @@
-import { useSelector } from "react-redux";
-import Balance from "../Balance/Balance";
-import LangSwitcher from "../LangSwitcher/LangSwitcher";
+import { useEffect } from "react";
 import "./App.css";
-import { selectLang, selectUpdated } from "../../redux/localeSlice";
+import { useDispatch } from "react-redux";
+import { fetchTasks } from "../../redux/tasksOps";
 
 const App = () => {
-  const lang = useSelector(selectLang);
-  const updatedAt = useSelector(selectUpdated);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
   return (
     <div>
-      <h1>React Redux</h1>
-      <Balance />
-
-      <LangSwitcher />
-      <p>Select lang: {lang} </p>
-      <p>Last updated at: {updatedAt}</p>
+      <h1>HTTP requests with Redux</h1>
+      <h2>Hello</h2>
     </div>
   );
 };
