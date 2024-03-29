@@ -11,14 +11,16 @@ const slice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(fetchTasks.pending, (state) => {
+        state.error = false;
         state.loading = true;
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
         state.items = action.payload;
         state.loading = false;
       })
-      .addCase(fetchTasks.rejected, (state, action) => {
+      .addCase(fetchTasks.rejected, (state) => {
         state.loading = false;
+        state.error = true;
       }),
 });
 
