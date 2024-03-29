@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div>
       <h1>HTTP requests with Redux</h1>
-      {loading && <Loader>Loader</Loader>}
+      {loading && !error && <Loader>Loader</Loader>}
       {error && <Error>Error message</Error>}
     </div>
   );
