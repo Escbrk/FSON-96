@@ -7,6 +7,7 @@ import Error from "../Error/Error";
 import Task from "../Task/Task";
 import TaskForm from "../TaskForm/TaskForm";
 import toast, { Toaster } from "react-hot-toast";
+import TaskList from "../TaskList/TaskList";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const App = () => {
       <TaskForm />
       {loading && !error && <Loader>Loader</Loader>}
       {error && <Error>Error message</Error>}
-      <Task />
+      <TaskList />
       <Toaster />
     </div>
   );
