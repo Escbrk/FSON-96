@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "../../redux/tasksOps";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
-import Task from "../Task/Task";
 import TaskForm from "../TaskForm/TaskForm";
 import toast, { Toaster } from "react-hot-toast";
 import TaskList from "../TaskList/TaskList";
+import TextFilter from "../TextFilter/TextFilter";
+import { selectError, selectLoading } from "../../redux/tasksSlice";
 
 const App = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.tasks.loading);
-  const error = useSelector((state) => state.tasks.error);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   useEffect(() => {
     dispatch(fetchTasks())
       .unwrap()
@@ -30,6 +31,7 @@ const App = () => {
       <TaskForm />
       {loading && !error && <Loader>Loader</Loader>}
       {error && <Error>Error message</Error>}
+      <TextFilter />
       <TaskList />
       <Toaster />
     </div>

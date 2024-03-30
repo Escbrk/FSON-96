@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import Task from "../Task/Task";
+import { selectTasks } from "../../redux/tasksSlice";
 
 const TaskList = () => {
-  const tasks = useSelector((state) => state.tasks.items);
+  const tasks = useSelector(selectTasks);
 
   return (
     <ul>
@@ -12,7 +13,6 @@ const TaskList = () => {
         </li>
       ))}
     </ul>
-
   );
 };
 
