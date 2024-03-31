@@ -1,41 +1,27 @@
-import { useEffect } from "react";
 import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTasks } from "../../redux/tasksOps";
-import Loader from "../Loader/Loader";
-import Error from "../Error/Error";
-import TaskForm from "../TaskForm/TaskForm";
-import toast, { Toaster } from "react-hot-toast";
-import TaskList from "../TaskList/TaskList";
-import TextFilter from "../TextFilter/TextFilter";
-import { selectError, selectLoading } from "../../redux/tasksSlice";
+import { Toaster } from "react-hot-toast";
+import Layout from "../Layout/Layout";
+import { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+
+const HomePage = lazy(() => import("../../pages/Home"));
+const RegisterPage = lazy(() => import("../../pages/Register"));
+const LoginPage = lazy(() => import("../../pages/Login"));
+const TasksPage = lazy(() => import("../../pages/Tasks"));
 
 const App = () => {
-  const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  
-  useEffect(() => {
-    dispatch(fetchTasks())
-      .unwrap()
-      .then(() => {
-        toast.success("fetchTasks fulfilled");
-      })
-      .catch((e) => {
-        toast.error(e);
-      });
-  }, [dispatch]);
-
   return (
-    <div>
-      <h1>HTTP requests with Redux</h1>
-      <TaskForm />
-      {loading && !error && <Loader>Loader</Loader>}
-      {error && <Error>Error message</Error>}
-      <TextFilter />
-      <TaskList />
+    <Layout>
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/tasks" element={<TasksPage />} />
+        </Routes>
+      </Suspense>
       <Toaster />
-    </div>
+    </Layout>
   );
 };
 

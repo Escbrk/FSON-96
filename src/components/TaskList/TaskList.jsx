@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import Task from "../Task/Task";
-import { selectVisibleTasks } from "../../redux/tasksSlice";
+import { selectVisibleTasks } from "../../redux/tasks/slice";
 
 const TaskList = () => {
   // const tasks = useSelector(selectTasks);
@@ -15,7 +15,10 @@ const TaskList = () => {
   return (
     <ul>
       {tasks.map((task) => (
-        <li key={task.id} style={{display: 'flex', justifyContent: 'space-between'}}>
+        <li
+          key={task.id}
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
           <Task task={task} />
         </li>
       ))}

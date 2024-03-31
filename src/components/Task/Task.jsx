@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteTask } from "../../redux/tasksOps";
+import { deleteTask } from "../../redux/tasks/operations.js";
 import { useState } from "react";
 import TaskEditor from "../TaskEditor/TaskEditor.jsx";
 

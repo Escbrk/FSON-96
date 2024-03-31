@@ -1,6 +1,7 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { addTask, deleteTask, fetchTasks, updateTask } from "./tasksOps";
-import { selectTextFilter } from "./filterSlice";
+import { addTask, deleteTask, fetchTasks, updateTask } from "./operations";
+import { selectTextFilter } from "../filterSlice";
+import { selectTasks } from "./selectors";
 
 const handlePending = (state) => {
   state.error = false;
@@ -53,11 +54,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const selectLoading = (state) => state.tasks.loading;
 
-export const selectError = (state) => state.tasks.error;
-
-export const selectTasks = (state) => state.tasks.items;
 
 // export const selectVisibleTasks = (state) => {
 //   console.log("selectVisibleTasks");
@@ -72,8 +69,6 @@ export const selectTasks = (state) => state.tasks.items;
 export const selectVisibleTasks = createSelector(
   [selectTasks, selectTextFilter],
   (tasks, textFilter) => {
-    console.log("selectVisibleTasks");
-
     return tasks.filter((task) =>
       task.text.toLowerCase().includes(textFilter.toLowerCase())
     );

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addTask } from "../../redux/tasksOps";
+import { addTask } from "../../redux/tasks/operations";
 
 const TaskForm = () => {
   const dispatch = useDispatch();
