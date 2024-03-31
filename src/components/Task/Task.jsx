@@ -8,7 +8,7 @@ const Task = ({ task }) => {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <>
       {isEditing ? (
         <TaskEditor
           initialValue={task.text}
@@ -21,7 +21,7 @@ const Task = ({ task }) => {
       {!isEditing && (
         <button onClick={() => dispatch(deleteTask(task.id))}>Delete</button>
       )}
-    </div>
+    </>
   );
 };
 

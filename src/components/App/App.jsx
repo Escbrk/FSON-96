@@ -14,6 +14,7 @@ const App = () => {
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  
   useEffect(() => {
     dispatch(fetchTasks())
       .unwrap()
