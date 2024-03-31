@@ -9,7 +9,7 @@ export default function Home() {
           💁‍♀️
         </span>
       </PageTitle>
-      <p>
+      <p style={{ color: "white" }}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
         asperiores eius nobis saepe quis voluptatibus facere expedita tempora,
         hic similique natus minima fugit doloribus molestiae dolorum sed debitis
@@ -18,7 +18,7 @@ export default function Home() {
         recusandae accusamus voluptatem aliquam, sed vero consectetur esse
         harum?
       </p>
-      <p>
+      <p style={{ color: "white" }}>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorum et
         illo non vel rerum odit, maxime, vitae dolorem molestiae error
         cupiditate! Quasi eaque est provident voluptates adipisci? Cumque
