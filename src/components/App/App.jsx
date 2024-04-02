@@ -1,5 +1,5 @@
 import "./App.css";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Layout from "../Layout/Layout";
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -19,7 +19,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser());
+    dispatch(refreshUser())
   }, [dispatch]);
 
   // useEffect(() => {
