@@ -2,6 +2,7 @@ import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { addTask, deleteTask, fetchTasks, updateTask } from "./operations";
 import { selectTextFilter } from "../filterSlice";
 import { selectAllTasks } from "./selectors";
+import { logOut } from "../auth/operations";
 
 const handlePending = (state) => {
   state.error = false;
@@ -49,7 +50,12 @@ const slice = createSlice({
         );
         state.items[taskIndex] = action.payload;
       })
-      .addCase(updateTask.rejected, handleRejected),
+      .addCase(updateTask.rejected, handleRejected)
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.error = null;
+        state.loading = false;
+      }),
 });
 
 export default slice.reducer;
