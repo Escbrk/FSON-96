@@ -17,9 +17,9 @@ export const fetchTasks = createAsyncThunk(
 
 export const addTask = createAsyncThunk(
   "tasks/addTask",
-  async (newTast, thunkAPI) => {
+  async (text, thunkAPI) => {
     try {
-      const response = await axios.post("/tasks", newTast);
+      const response = await axios.post("/tasks", { text });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
