@@ -7,7 +7,7 @@ const setAuthHeader = (token) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 
-const clearAurhHeader = (token) => {
+const clearAurhHeader = () => {
   axios.defaults.headers.common["Authorization"] = "";
 };
 
