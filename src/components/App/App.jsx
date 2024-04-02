@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import { refreshUser } from "../../redux/auth/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
+import RestrictedRoute from "../RestrictedRoute";
+import PrivateRoute from "../PrivateRoute";
 
 const HomePage = lazy(() => import("../../pages/Home"));
 const RegisterPage = lazy(() => import("../../pages/Register"));
@@ -33,9 +35,27 @@ const App = () => {
       <Suspense>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/tasks" element={<TasksPage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                component={<RegisterPage />}
+                redirectTo="/tasks"
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute component={<LoginPage />} redirectTo="/tasks" />
+            }
+          />
+          <Route
+            path="/tasks"
+            element={
+              <PrivateRoute component={<TasksPage />} redirectTo="/login" />
+            }
+          />
         </Routes>
       </Suspense>
       <Toaster />
