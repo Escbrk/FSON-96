@@ -22,6 +22,8 @@ const App = () => {
     dispatch(refreshUser())
   }, [dispatch]);
 
+  // qwe@qwe.cpm
+
   // useEffect(() => {
   //   if (token !== null) {
   //     dispatch(refreshUser());
