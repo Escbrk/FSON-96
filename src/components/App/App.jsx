@@ -59,7 +59,7 @@ const App = () => {
               <PrivateRoute component={<TasksPage />} redirectTo="/login" />
             }
           />
-          <Route to="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Toaster />
