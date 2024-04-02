@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
 import RestrictedRoute from "../RestrictedRoute";
 import PrivateRoute from "../PrivateRoute";
+import NotFound from "../../pages/NotFound";
 
 const HomePage = lazy(() => import("../../pages/Home"));
 const RegisterPage = lazy(() => import("../../pages/Register"));
@@ -19,7 +20,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser())
+    dispatch(refreshUser());
   }, [dispatch]);
 
   // qwe@qwe.cpm
@@ -58,6 +59,7 @@ const App = () => {
               <PrivateRoute component={<TasksPage />} redirectTo="/login" />
             }
           />
+          <Route to="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Toaster />
